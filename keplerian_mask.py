@@ -75,7 +75,7 @@ import numpy as np
 import scipy.constants as sc
 import re
 
-def _mask_name(imagename):
+def _mask_name(imagename, maskname=None):
     """Return a string for the output image name
        for the mask.  Whether the input is .fits
        or .image, we will write the mask file
@@ -316,7 +316,7 @@ def _save_as_image(image, mask, overwrite=True, dropstokes=True):
     ia.open(image)
     coord_sys = ia.coordsys().torecord()
     ia.close()
-    outfile = _mask_name(image)
+    outfile = _mask_name(image,maskname)
     if overwrite:
         rmtables(outfile)
     if dropstokes:
@@ -509,9 +509,9 @@ def make_mask(inc, PA, dist, mstar, vlsr, dx0=0.0, dy0=0.0, zr=0.0,
     # Save it as a mask. Again, clunky but it works.
     _save_as_image(image, mask, dropstokes=dropstokes)
     if (nbeams is not None) or (target_res is not None):
-        _convolve_image(image, _mask_name(image),
+        _convolve_image(image, _mask_name(image,maskname),
                         nbeams=nbeams, target_res=target_res)
-    mask_filename = _mask_name(image)
+    mask_filename = _mask_name(image,maskname)
     # Convert the image in-place to a boolean mask with only 1/0 values: 
     _save_as_mask(mask_filename, tolerance)
 
