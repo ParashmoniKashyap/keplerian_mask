@@ -80,10 +80,14 @@ def _mask_name(imagename):
        for the mask.  Whether the input is .fits
        or .image, we will write the mask file
        output as native CASA .image."""
-    outfile = _trim_name(imagename)
-    assert re.search(r'\.(fits|image)$', outfile, flags=re.IGNORECASE), \
-      "Unrecognized image extension: {}".format(imagename)
-    return re.sub(r'\.(fits|image)$', r'.mask.image', outfile, flags=re.IGNORECASE)
+    if maskname == None:
+        outfile = _trim_name(imagename)
+        assert re.search(r'\.(fits|image)$', outfile, flags=re.IGNORECASE), \
+          "Unrecognized image extension: {}".format(imagename)
+        return re.sub(r'\.(fits|image)$', r'.mask.image', outfile, flags=re.IGNORECASE)
+    else:
+        return maskname
+
 
 def _get_axis_idx(header, axis_name):
     """Return the axis number of the given axis."""
