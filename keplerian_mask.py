@@ -417,7 +417,7 @@ def make_mask(inc, PA, dist, mstar, vlsr, dx0=0.0, dy0=0.0, zr=0.0,
               image=None, x_axis=None, y_axis=None, s_axis=None, v_axis=None,
               z_func=None, dV0=300.0, dVq=-0.5, r_min=0.0, r_max=4.0,
               nbeams=None, target_res=None, tolerance=0.01, restfreqs=None,
-              estimate_rms=True, max_dzr=0.2, export_FITS=False):
+              estimate_rms=True, max_dzr=0.2, export_FITS=False, maskname=None):
     """
     Make a Keplerian mask for CLEANing.
 
